@@ -1,3 +1,4 @@
+import { Optional } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty } from "class-validator";
 
@@ -17,17 +18,18 @@ export class CreateEmpresaDto {
 
   @IsNotEmpty()
   @ApiProperty()
+  @Optional()
   excluido: boolean;
 
   @IsNotEmpty()
   @ApiProperty()
+  @Optional()
   flAdm: boolean;
 
-  @IsNotEmpty()
+
   @ApiProperty()
   dataCadastro: Date;
 
-  @IsNotEmpty()
   @ApiProperty()
   dataAlteracao: Date;
 

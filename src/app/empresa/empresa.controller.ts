@@ -6,6 +6,9 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateEmpresaSwagger } from './swagger/create-empresa.swagger';
 import { ShowEmpresaSwagger } from './swagger/show-empresa.swagger';
 import { UpdateEmpresaSwagger } from './swagger/update-empresa.swagger';
+import { IndexEmpresaSwagger } from './swagger/index-empresa.swagger';
+import { BadRequestSwagger } from 'src/helpers/swagger/bad-request.swagger';
+import { NotFoundSwagger } from 'src/helpers/swagger/not-found.swagger';
 
 @Controller('empresa')
 @ApiTags('empresas')
@@ -17,7 +20,12 @@ export class EmpresaController {
   @ApiResponse({
     status: 201,
     description: 'Lista de empresas retornada com sucesso',
-    type: CreateEmpresaSwagger,
+    type: CreateEmpresaSwagger
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Parâmetros inválidos',
+    type: BadRequestSwagger,
   })
   create(@Body() createEmpresaDto: CreateEmpresaDto) {
     return this.empresaService.create(createEmpresaDto);
@@ -28,9 +36,10 @@ export class EmpresaController {
   @ApiResponse({
     status: 200,
     description: 'Lista de empresas retornada com sucesso',
-    type: ShowEmpresaSwagger,
-
+    type: IndexEmpresaSwagger,
+    isArray: true,
   })
+
   findAll() {
     return this.empresaService.findAll();
   }
@@ -41,6 +50,11 @@ export class EmpresaController {
     status: 200,
     description: 'Lista de empresas retornada com sucesso',
     type: ShowEmpresaSwagger,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Empresa não foi encontrada',
+    type: NotFoundSwagger,
   })
   findOne(@Param('id') id: string) {
     return this.empresaService.findOne(+id);
@@ -53,8 +67,18 @@ export class EmpresaController {
     description: 'Empresa atualizada com sucesso',
     type: UpdateEmpresaSwagger,
   })
+  @ApiResponse({
+    status: 400,
+    description: 'Dados inválidos',
+    type: BadRequestSwagger,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Empresa não foi encontrada',
+    type: NotFoundSwagger,
+  })
   update(@Param('id') id: string, @Body() updateEmpresaDto: UpdateEmpresaDto) {
-    return this.empresaService.update(+id, updateEmpresaDto);
+    return this.empresaService.update(id, updateEmpresaDto);
   }
 
   @Delete(':id')
