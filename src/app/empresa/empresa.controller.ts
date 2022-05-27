@@ -12,10 +12,12 @@ import { NotFoundSwagger } from 'src/helpers/swagger/not-found.swagger';
 
 @Controller('empresa')
 @ApiTags('empresas')
+
 export class EmpresaController {
   constructor(private readonly empresaService: EmpresaService) { }
 
   @Post()
+
   @ApiOperation({ summary: 'Adicionar uma nova empresa' })
   @ApiResponse({
     status: 201,
@@ -88,6 +90,6 @@ export class EmpresaController {
     description: 'Empresa excluída com sucesso',
   })
   remove(@Param('id') id: string) {
-    return this.empresaService.remove(+id);
+    return this.empresaService.remove(id);
   }
 }

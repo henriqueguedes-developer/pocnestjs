@@ -30,6 +30,8 @@ export class CreateEmpresaDto {
   @ApiProperty()
   dataCadastro: Date;
 
+
+
   @ApiProperty()
   dataAlteracao: Date;
 
