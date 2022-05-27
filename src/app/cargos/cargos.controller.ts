@@ -5,7 +5,7 @@ import { UpdateCargoDto } from './dto/update-cargo.dto';
 
 @Controller('cargos')
 export class CargosController {
-  constructor(private readonly cargosService: CargosService) {}
+  constructor(private readonly cargosService: CargosService) { }
 
   @Post()
   create(@Body() createCargoDto: CreateCargoDto) {
@@ -19,16 +19,16 @@ export class CargosController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.cargosService.findOne(+id);
+    return this.cargosService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCargoDto: UpdateCargoDto) {
-    return this.cargosService.update(+id, updateCargoDto);
+    return this.cargosService.update(id, updateCargoDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.cargosService.remove(+id);
+    return this.cargosService.remove(id);
   }
 }

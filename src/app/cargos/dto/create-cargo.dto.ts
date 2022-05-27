@@ -13,7 +13,7 @@ export class CreateCargoDto {
 
   @IsNotEmpty()
   @ApiProperty()
-  dsCargo: string;
+  dsCargo: number;
 
   @IsNotEmpty()
   @ApiProperty()

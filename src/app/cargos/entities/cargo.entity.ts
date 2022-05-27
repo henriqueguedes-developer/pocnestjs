@@ -27,8 +27,8 @@ export class CargoEntity {
   cdCargo: number;
 
   @Column({ name: 'DS_CARGO' })
-  @ApiProperty()
-  dsCargo: string;
+
+  dsCargo?: number;
 
   @Column({ name: 'FL_SITUACAO' })
   @ApiProperty()
