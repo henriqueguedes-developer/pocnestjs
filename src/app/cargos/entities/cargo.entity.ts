@@ -13,7 +13,7 @@ import {
 
 @Entity({ name: 'cargos' })
 
-export class CargoEnity {
+export class CargoEntity {
 
   @PrimaryGeneratedColumn('uuid', { name: 'ID_CARGO' })
   @ApiProperty()
@@ -24,9 +24,7 @@ export class CargoEnity {
   idEmpresa: string;
 
   @Column({ name: 'CD_CARGO' })
-  @Generated('increment')
-  @ApiProperty()
-  cdCargo: string;
+  cdCargo: number;
 
   @Column({ name: 'DS_CARGO' })
   @ApiProperty()

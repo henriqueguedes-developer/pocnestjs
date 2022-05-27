@@ -1,26 +1,42 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateCargoDto } from './dto/create-cargo.dto';
 import { UpdateCargoDto } from './dto/update-cargo.dto';
+import { CargoEntity } from './entities/cargo.entity';
 
 @Injectable()
 export class CargosService {
-  create(createCargoDto: CreateCargoDto) {
-    return 'This action adds a new cargo';
+  constructor(
+    @InjectRepository(CargoEntity)
+    private readonly cargoRepository: Repository<CargoEntity>,
+  ) { }
+
+  async create(createCargoDto: CreateCargoDto) {
+    return await this.cargoRepository.save(this.cargoRepository.create(createCargoDto));
+
   }
 
-  findAll() {
-    return `This action returns all cargos`;
+  async findAll() {
+    return await this.cargoRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} cargo`;
+  async findOne(id: string) {
+    return await this.cargoRepository.findOne(
+      {
+        where:
+          { id }
+      }
+    );
   }
 
-  update(id: number, updateCargoDto: UpdateCargoDto) {
-    return `This action updates a #${id} cargo`;
+  async update(id: string, updateCargoDto: UpdateCargoDto) {
+    return this.cargoRepository.update({ id }, updateCargoDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} cargo`;
+  remove(id: string) {
+    return this.cargoRepository.delete(id);
   }
 }
+
+
