@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
 
   const config = new DocumentBuilder()
-    .setTitle('My First API')
+    .setTitle('GB  API')
     .setVersion('0.0.1')
     .build();
 

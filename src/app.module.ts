@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProdutoModule } from './app/produto/produto.module';
 import { EmpresaModule } from './app/empresa/empresa.module';
 import { CargosModule } from './app/cargos/cargos.module';
 
@@ -23,7 +22,6 @@ import { CargosModule } from './app/cargos/cargos.module';
         logging: 'all',
       }),
     }),
-    ProdutoModule,
     EmpresaModule,
     CargosModule,
   ],

@@ -10,7 +10,7 @@ import { IndexEmpresaSwagger } from './swagger/index-empresa.swagger';
 import { BadRequestSwagger } from 'src/helpers/swagger/bad-request.swagger';
 import { NotFoundSwagger } from 'src/helpers/swagger/not-found.swagger';
 
-@Controller('empresa')
+@Controller('empresas')
 @ApiTags('empresas')
 
 export class EmpresaController {
