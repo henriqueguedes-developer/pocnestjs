@@ -1,4 +1,4 @@
-import { ValidationPipe } from '@nestjs/common';
+import { BadRequestException, ValidationError, ValidationPipe } from '@nestjs/common/';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
@@ -15,9 +15,20 @@ async function bootstrap() {
 
   SwaggerModule.setup('swagger', app, document);
 
-  app.useGlobalPipes(
+  /*app.useGlobalPipes(
     new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
-  );
+  );*/
+  app.useGlobalPipes(new ValidationPipe({
+    exceptionFactory: (validationErrors: ValidationError[] = []) => {
+      const errors = validationErrors.map(e => Object.values(e.constraints));
+      const message = errors.join(', ');
+      return new BadRequestException(message);
+      //const message = errors.join(', ');
+      //return new BadRequestException(message);
+
+      return new BadRequestException(validationErrors[0].constraints);
+    }
+  }));
   await app.listen(3334);
 }
 bootstrap();

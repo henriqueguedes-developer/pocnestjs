@@ -1,8 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { EmpresaModule } from './app/empresa/empresas.module';
+//import { EmpresaModule } from './app/empresa_tmp/empresas.module';
 import { CargosModule } from './app/cargos/cargos.module';
+import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -22,10 +26,18 @@ import { CargosModule } from './app/cargos/cargos.module';
         logging: 'all',
       }),
     }),
-    EmpresaModule,
+    // EmpresaModule,
     CargosModule,
+    AuthModule,
+
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
 export class AppModule { }

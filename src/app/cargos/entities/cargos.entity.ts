@@ -1,4 +1,4 @@
-import { EmpresaEntity } from "src/app/empresa/entities/empresa.entity";
+
 import {
   Column,
   CreateDateColumn,
@@ -10,7 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ name: 'cargos' })
+@Entity({ schema: 'GB', name: 'CARGOS' })
 
 export class CargoEntity {
 
@@ -42,7 +42,7 @@ export class CargoEntity {
   @Column({ nullable: true, name: 'ID_USUARIO_ALTERACAO' })
   idUsuarioAlteracao?: string;
 
-  @ManyToOne(() => EmpresaEntity, empresa => empresa.id)
-  @JoinColumn({ name: 'CD_EMPRESA' })
-  empresa: EmpresaEntity;
+  /* @ManyToOne(() => EmpresaEntity, empresa => empresa.id)
+   @JoinColumn({ name: 'CD_EMPRESA' })
+   empresa: EmpresaEntity;*/
 }

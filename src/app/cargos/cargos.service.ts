@@ -13,8 +13,9 @@ export class CargosService {
   ) { }
 
   async create(createCargoDto: CreateCargoDto) {
-    return await this.cargoRepository.save(this.cargoRepository.create(createCargoDto));
 
+
+    return await this.cargoRepository.save(this.cargoRepository.create(createCargoDto));
   }
 
   async findAll() {
