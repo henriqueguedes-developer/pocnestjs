@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-//import { EmpresaModule } from './app/empresa_tmp/empresas.module';
-import { CargosModule } from './app/cargos/cargos.module';
+import { CargosModule } from './Admin/cargos/cargos.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { AppService } from './app.service';
+import { EmpresasModule } from './Admin/empresas/empresas.module';
 
 @Module({
   imports: [
@@ -22,13 +22,13 @@ import { AppService } from './app.service';
         password: configService.get('TYPEORM_PASSWORD'),
         port: Number(configService.get('TYPEORM_PORT', 3306)),
         entities: [__dirname + '/**/*.entity.js'],
-        synchronize: true,
+        synchronize: false,
         logging: 'all',
       }),
     }),
-    // EmpresaModule,
     CargosModule,
     AuthModule,
+    EmpresasModule,
 
   ],
   controllers: [],

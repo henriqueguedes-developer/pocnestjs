@@ -1,4 +1,5 @@
 
+import { EmpresaEntity } from 'src/Admin/empresas/entities/empresa.entity';
 import {
   Column,
   CreateDateColumn,
@@ -42,7 +43,7 @@ export class CargoEntity {
   @Column({ nullable: true, name: 'ID_USUARIO_ALTERACAO' })
   idUsuarioAlteracao?: string;
 
-  /* @ManyToOne(() => EmpresaEntity, empresa => empresa.id)
-   @JoinColumn({ name: 'CD_EMPRESA' })
-   empresa: EmpresaEntity;*/
+  @ManyToOne(() => EmpresaEntity, empresa => empresa.id)
+  @JoinColumn({ name: 'CD_EMPRESA' })
+  empresa: EmpresaEntity;
 }

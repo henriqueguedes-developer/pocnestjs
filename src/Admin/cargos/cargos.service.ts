@@ -14,8 +14,6 @@ export class CargosService {
   ) { }
 
   async create(createCargoDto: CreateCargoDto) {
-
-
     return await this.cargoRepository.save(this.cargoRepository.create(createCargoDto));
   }
 
@@ -50,22 +48,22 @@ export class CargosService {
   }
 
   async flsituacaoUpdate(id: string, flsituacaoUpdateCargoDto: FlsituacaoUpdateCargoDto) {
-    const verifcaCargo = await this.cargoRepository.findOne(
+    const verificaCargo = await this.cargoRepository.findOne(
       {
         where:
           { id }
       }
     );
-    if (verifcaCargo) {
+    if (verificaCargo) {
       await this.cargoRepository.update({ id }, flsituacaoUpdateCargoDto);
+      return {
+        message: 'Flsituação atualizado com sucesso',
+      }
     }
     return {
-      message: 'Flsituação atualizado com sucesso',
+      message: 'Cargo não encontrado',
     }
-
   }
-
-
 }
 
 
