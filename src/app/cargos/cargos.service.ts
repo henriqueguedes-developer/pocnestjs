@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCargoDto } from './dto/create-cargo.dto';
 import { UpdateCargoDto } from './dto/update-cargo.dto';
+import { FlsituacaoUpdateCargoDto } from './dto/update-flsituacao.dto';
 import { CargoEntity } from './entities/cargos.entity';
 
 @Injectable()
@@ -38,6 +39,24 @@ export class CargosService {
   remove(id: string) {
     return this.cargoRepository.delete(id);
   }
+
+  async flsituacaoUpdate(id: string, flsituacaoUpdateCargoDto: FlsituacaoUpdateCargoDto) {
+    const verifcaCargo = await this.cargoRepository.findOne(
+      {
+        where:
+          { id }
+      }
+    );
+    if (verifcaCargo) {
+      await this.cargoRepository.update({ id }, flsituacaoUpdateCargoDto);
+    }
+    return {
+      message: 'Flsituação atualizado com sucesso',
+    }
+
+  }
+
+
 }
 
 

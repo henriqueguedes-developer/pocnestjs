@@ -4,6 +4,7 @@ import { BadRequestSwagger } from 'src/helpers/swagger/bad-request.swagger';
 import { CargosService } from './cargos.service';
 import { CreateCargoDto } from './dto/create-cargo.dto';
 import { UpdateCargoDto } from './dto/update-cargo.dto';
+import { FlsituacaoUpdateCargoDto } from './dto/update-flsituacao.dto';
 import { CreateCargoSwagger, ShowCargoSwagger, UpdateCargoSwagger } from './swagger/index';
 
 @Controller('cargos')
@@ -83,12 +84,10 @@ export class CargosController {
   remove(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.cargosService.remove(id);
   }
+
+  @Patch('flsituacao/:id')
+  flsituacaoUpdate(@Param('id', new ParseUUIDPipe()) id: string, @Body() flSituacaoCargoDto: FlsituacaoUpdateCargoDto) {
+    return this.cargosService.flsituacaoUpdate(id, flSituacaoCargoDto);
+  }
 }
-/* 
-listar por empresa 
-e do desativar o flsituacao 
-listar por empresa
-desativar 
-/*
-https://stackoverflow.com/questions/70838523/nestjs-typeorm-postgresql-using-custom-schema
-*/
+
