@@ -1,10 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { BadRequestSwagger } from 'src/helpers/swagger/bad-request.swagger';
 import { CargosService } from './cargos.service';
 import { CreateCargoDto } from './dto/create-cargo.dto';
 import { UpdateCargoDto } from './dto/update-cargo.dto';
-import { CreateCargoSwagger } from './swagger/create-cargos.swagger';
+import { CreateCargoSwagger, ShowCargoSwagger, UpdateCargoSwagger } from './swagger/index';
 
 @Controller('cargos')
 @ApiTags('cargos')
@@ -28,23 +28,59 @@ export class CargosController {
     return this.cargosService.create(createCargoDto);
   }
 
+
   @Get()
+  @ApiOperation({ summary: 'Listar todos os cargos' })
+  @ApiResponse({
+    status: 200,
+    description: 'Cargos retornados com sucesso',
+    type: ShowCargoSwagger,
+    isArray: true,
+  })
   findAll() {
     return this.cargosService.findAll();
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Listar cargos por id' })
+  @ApiResponse({
+    status: 200,
+    description: 'Cargo retornado com sucesso',
+    type: ShowCargoSwagger,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Cargo não foi encontrado',
+    type: BadRequestSwagger,
+  })
   findOne(@Param('id') id: string) {
     return this.cargosService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCargoDto: UpdateCargoDto) {
+  @ApiOperation({ summary: 'Atualizar cargo' })
+  @ApiResponse({
+    status: 200,
+    description: 'Cargo retornado com sucesso',
+    type: UpdateCargoSwagger,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Cargo não foi encontrado',
+    type: BadRequestSwagger,
+  })
+  update(@Param('id', new ParseUUIDPipe()) id: string, @Body() updateCargoDto: UpdateCargoDto) {
     return this.cargosService.update(id, updateCargoDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  @ApiOperation({ summary: 'Remover cargo' })
+  @ApiResponse({
+    status: 200,
+    description: 'Cargo removido com sucesso',
+  })
+
+  remove(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.cargosService.remove(id);
   }
 }

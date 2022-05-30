@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { EmpresaModule } from './app/empresa/empresa.module';
+import { EmpresaModule } from './app/empresa/empresas.module';
 import { CargosModule } from './app/cargos/cargos.module';
 
 @Module({

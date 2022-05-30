@@ -1,10 +1,11 @@
 import { Optional } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty } from "class-validator";
+import { IsIn, IsNotEmpty, IsUUID, IsString } from "class-validator";
 
 export class CreateCargoDto {
   @IsNotEmpty()
   @ApiProperty()
+  @IsUUID()
   idEmpresa: string;
 
   @IsNotEmpty()
@@ -13,23 +14,22 @@ export class CreateCargoDto {
 
   @IsNotEmpty()
   @ApiProperty()
-  dsCargo: number;
+  dsCargo: string;
 
+  @ApiProperty()
   @IsNotEmpty()
-  @ApiProperty()
-  flSituacao: number;
+  @IsIn([1, 2])
+  flSituacao?: number;
 
   @ApiProperty()
+  @Optional()
   dtCadastro: Date;
 
   @ApiProperty()
+  @IsNotEmpty()
+  @IsUUID()
   idUsuarioCadastro: string;
 
-  @ApiProperty()
   dataAlteracao: Date;
-
-  @ApiProperty()
   idUsuarioAlteracao: string;
-
-
 }

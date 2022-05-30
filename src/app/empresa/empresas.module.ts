@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { EmpresaService } from './empresa.service';
-import { EmpresaController } from './empresa.controller';
+import { EmpresaService } from './empresas.service';
+import { EmpresaController } from './empresas.controller';
 import { EmpresaEntity } from './entities/empresa.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 

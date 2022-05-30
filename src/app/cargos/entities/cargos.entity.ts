@@ -24,11 +24,12 @@ export class CargoEntity {
   idEmpresa: string;
 
   @Column({ name: 'CD_CARGO' })
+  @ApiProperty()
   cdCargo: number;
 
   @Column({ name: 'DS_CARGO' })
-
-  dsCargo?: number;
+  @ApiProperty()
+  dsCargo: string;
 
   @Column({ name: 'FL_SITUACAO' })
   @ApiProperty()
@@ -43,12 +44,12 @@ export class CargoEntity {
   idUsuarioCadastro: string;
 
   @UpdateDateColumn({ name: 'DT_ALTERACAO' })
-  @ApiProperty()
+
   dataAlteracao: Date;
 
-  @Column({ name: 'ID_USUARIO_ALTERACAO' })
-  @ApiProperty()
-  idUsuarioAlteracao: string;
+  @Column({ nullable: true, name: 'ID_USUARIO_ALTERACAO' })
+
+  idUsuarioAlteracao?: string;
 
   @ManyToOne(() => EmpresaEntity, empresa => empresa.id)
   @JoinColumn({ name: 'CD_EMPRESA' })
