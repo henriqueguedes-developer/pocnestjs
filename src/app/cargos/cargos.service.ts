@@ -32,6 +32,15 @@ export class CargosService {
     );
   }
 
+  async findEmpresa(idEmpresa: string) {
+    return await this.cargoRepository.find(
+      {
+        where:
+          { idEmpresa }
+      }
+    );
+  }
+
   async update(id: string, updateCargoDto: UpdateCargoDto) {
     return this.cargoRepository.update({ id }, updateCargoDto);
   }

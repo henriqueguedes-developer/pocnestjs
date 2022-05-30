@@ -14,7 +14,6 @@ export class CargosController {
 
   @Post()
   @ApiOperation({ summary: 'Adicionar um novo cargo' })
-
   @ApiResponse({
     status: 201,
     description: 'Cargo retornado com sucesso',
@@ -41,7 +40,7 @@ export class CargosController {
     return this.cargosService.findAll();
   }
 
-  @Get(':id')
+
   @ApiOperation({ summary: 'Listar cargos por id' })
   @ApiResponse({
     status: 200,
@@ -53,9 +52,16 @@ export class CargosController {
     description: 'Cargo não foi encontrado',
     type: BadRequestSwagger,
   })
+  @Get(':id')
   findOne(@Param('id') id: string) {
     return this.cargosService.findOne(id);
   }
+
+  @Get('empresa/:id')
+  findEmpresa(@Param('id') id: string) {
+    return this.cargosService.findEmpresa(id);
+  }
+
 
   @Patch(':id')
   @ApiOperation({ summary: 'Atualizar cargo' })
@@ -80,7 +86,6 @@ export class CargosController {
     status: 200,
     description: 'Cargo removido com sucesso',
   })
-
   remove(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.cargosService.remove(id);
   }
