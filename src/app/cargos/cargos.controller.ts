@@ -28,7 +28,6 @@ export class CargosController {
     return this.cargosService.create(createCargoDto);
   }
 
-
   @Get()
   @ApiOperation({ summary: 'Listar todos os cargos' })
   @ApiResponse({
