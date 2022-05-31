@@ -48,7 +48,7 @@ export class CargosService {
     return this.cargoRepository.delete(id);
   }
 
-  async flsituacaoUpdate(id: string, flSituacaoCargoDto: FlSituacaoCargoDto) {
+  async flsituacaoUpdate(id: string, flsituacaoCargoDto: FlSituacaoCargoDto) {
     const verificaCargo = await this.cargoRepository.findOne(
       {
         where:
@@ -56,7 +56,7 @@ export class CargosService {
       }
     );
     if (verificaCargo) {
-      await this.cargoRepository.update({ id }, flSituacaoCargoDto);
+      await this.cargoRepository.update({ id }, flsituacaoCargoDto);
       return {
         message: 'Flsituação atualizado com sucesso',
       }

@@ -57,13 +57,6 @@ export class EmpresasController {
     return this.empresaService.findOne(id);
   }
 
-  @Get('empresa/:id')
-  findEmpresa(@Param('id') id: string) {
-    return;
-    // return this.empresaService.findEmpresa(id);
-  }
-
-
   @Patch(':id')
   @ApiOperation({ summary: 'Atualizar empresa' })
   @ApiResponse({
@@ -76,8 +69,8 @@ export class EmpresasController {
     description: 'Empresa não foi encontrada',
     type: BadRequestSwagger,
   })
-  update(@Param('id', new ParseUUIDPipe()) id: string, @Body() updateCargoDto: UpdateEmpresaDto) {
-    return this.empresaService.update(id, updateCargoDto);
+  update(@Param('id', new ParseUUIDPipe()) id: string, @Body() updateEmpresaDto: UpdateEmpresaDto) {
+    return this.empresaService.update(id, updateEmpresaDto);
   }
 
   @Delete(':id')
@@ -93,8 +86,8 @@ export class EmpresasController {
 
   @Patch('flsituacao/:id')
   flsituacaoUpdate(@Param('id', new ParseUUIDPipe()) id: string, @Body() flsituacaoEmpresaDto: FlSituacaoEmpresaDto) {
-    return;
-    //return this.empresaService.flsituacaoUpdate(id, flsituacaoEmpresaDto);
+
+    return this.empresaService.flsituacaoUpdate(id, flsituacaoEmpresaDto);
   }
 }
 

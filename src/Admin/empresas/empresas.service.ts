@@ -11,19 +11,19 @@ import { EmpresaEntity } from './entities/empresa.entity';
 export class EmpresasService {
   constructor(
     @InjectRepository(EmpresaEntity)
-    private readonly cargoRepository: Repository<EmpresaEntity>,
+    private readonly empresaRepository: Repository<EmpresaEntity>,
   ) { }
 
-  async create(createCargoDto: CreateEmpresaDto) {
-    return await this.cargoRepository.save(this.cargoRepository.create(createCargoDto));
+  async create(createEmpresaDto: CreateEmpresaDto) {
+    return await this.empresaRepository.save(this.empresaRepository.create(createEmpresaDto));
   }
 
   async findAll() {
-    return await this.cargoRepository.find();
+    return await this.empresaRepository.find();
   }
 
   async findOne(id: string) {
-    return await this.cargoRepository.findOne(
+    return await this.empresaRepository.findOne(
       {
         where:
           { id }
@@ -31,32 +31,24 @@ export class EmpresasService {
     );
   }
 
-  async findEmpresa(idEmpresa: string) {
-    return await this.cargoRepository.find(
-      {
-        where:
-          { idEmpresa }
-      }
-    );
-  }
-
-  async update(id: string, updateCargoDto: UpdateEmpresaDto) {
-    return this.cargoRepository.update({ id }, updateCargoDto);
+  async update(id: string, updateEmpresaDto: UpdateEmpresaDto) {
+    return this.empresaRepository.update({ id }, updateEmpresaDto);
   }
 
   remove(id: string) {
-    return this.cargoRepository.delete(id);
+    return this.empresaRepository.delete(id);
   }
 
-  async flsituacaoUpdate(id: string, flSituacaoCargoDto: FlSituacaoEmpresaDto) {
-    const verificaCargo = await this.cargoRepository.findOne(
+  async flsituacaoUpdate(id: string, flsituacaoEmpresaDto: FlSituacaoEmpresaDto) {
+
+    const verificaEmpresa = await this.empresaRepository.findOne(
       {
         where:
           { id }
       }
     );
-    if (verificaCargo) {
-      //   await this.cargoRepository.update({ id }, FlSituacaoEmpresaDto);
+    if (verificaEmpresa) {
+      await this.empresaRepository.update({ id }, flsituacaoEmpresaDto);
       return {
         message: 'Flsituação atualizado com sucesso',
       }

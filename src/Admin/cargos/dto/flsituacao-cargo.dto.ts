@@ -7,8 +7,8 @@ export class FlSituacaoCargoDto {
     message: 'O campo flSituacao deve ser um numero, entre 1 e 2',
   })
   @ApiProperty({
-    description: 'ID da empresa',
-    example: '5e9f8f8f-f8f8-f8f8-f8f8-f8f8f8f8f8f8',
+    description: '1 - Ativo, 2 - Inativo',
+    example: 1,
   })
   flSituacao: number;
 

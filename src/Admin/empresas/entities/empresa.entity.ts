@@ -1,5 +1,6 @@
-
+import { v4 as uuid } from 'uuid';
 import {
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
@@ -25,25 +26,27 @@ export class EmpresaEntity {
 
   @Column({ name: 'DS_URL' })
   url: string;
+
   @Column({ name: 'DS_LOGO', default: '' })
   logoEmpresa?: string;
 
-  @Column({ name: 'FL_EXCLUIDO' })
+  @Column({ name: 'FL_EXCLUIDO', default: false })
   excluido: boolean;
 
-  @Column({ name: 'FL_ADM' })
+  @Column({ name: 'FL_SITUACAO', default: 1 })
+  flSituacao: number;
+
+  @Column({ name: 'FL_ADM', default: true })
   flAdm: boolean;
 
-  @Column({ name: 'DT_CADASTRO' })
+  @CreateDateColumn({ name: 'DT_CADASTRO' })
   dataCadastro: Date;
 
-  @Column({ name: 'DT_ALTERCAO' })
-  dataAlteracao: Date;
+  @UpdateDateColumn({ name: 'DT_ALTERCAO' })
+  dataAlteracao?: Date;
 
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  update_at: Date;
-
+  @BeforeInsert()
+  beforeInsert() {
+    this.idEmpresa = uuid();
+  }
 }
