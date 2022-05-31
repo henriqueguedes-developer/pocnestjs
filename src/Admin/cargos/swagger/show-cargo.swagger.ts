@@ -1,3 +1,3 @@
-import { CargoEntity } from '../entities/cargos.entity';
+import { CargoEntity } from '../entities/cargo.entity';
 
 export class ShowCargoSwagger extends CargoEntity { }

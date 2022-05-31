@@ -22,7 +22,7 @@ import { EmpresasModule } from './Admin/empresas/empresas.module';
         password: configService.get('TYPEORM_PASSWORD'),
         port: Number(configService.get('TYPEORM_PORT', 3306)),
         entities: [__dirname + '/**/*.entity.js'],
-        synchronize: false,
+        synchronize: true,
         logging: 'all',
       }),
     }),

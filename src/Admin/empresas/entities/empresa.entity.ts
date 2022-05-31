@@ -25,9 +25,8 @@ export class EmpresaEntity {
 
   @Column({ name: 'DS_URL' })
   url: string;
-
-  @Column({ name: 'DS_LOGO' })
-  logoEmpresa: string;
+  @Column({ name: 'DS_LOGO', default: '' })
+  logoEmpresa?: string;
 
   @Column({ name: 'FL_EXCLUIDO' })
   excluido: boolean;

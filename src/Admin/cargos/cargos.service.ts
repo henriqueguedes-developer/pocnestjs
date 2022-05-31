@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateCargoDto } from './dto/create-cargo.dto';
 import { UpdateCargoDto } from './dto/update-cargo.dto';
 import { FlsituacaoUpdateCargoDto } from './dto/update-flsituacao.dto';
-import { CargoEntity } from './entities/cargos.entity';
+import { CargoEntity } from './entities/cargo.entity';
 
 @Injectable()
 export class CargosService {
