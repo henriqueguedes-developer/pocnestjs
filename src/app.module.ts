@@ -23,7 +23,7 @@ import { EmpresasModule } from './Admin/empresas/empresas.module';
         port: Number(configService.get('TYPEORM_PORT', 3306)),
         entities: [__dirname + '/**/*.entity.js'],
         synchronize: true,
-        logging: 'all',
+        logging: false,
       }),
     }),
     CargosModule,

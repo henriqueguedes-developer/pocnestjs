@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, HttpCode, HttpStatus, UsePipes } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { BadRequestSwagger } from 'src/helpers/swagger/bad-request.swagger';
 import { EmpresasService } from './empresas.service';
@@ -6,6 +6,7 @@ import {
   CreateEmpresaDto, UpdateEmpresaDto, FlSituacaoEmpresaDto
 } from './dto/index';
 import { CreateEmpresaSwagger, ShowEmpresaSwagger, UpdateEmpresaSwagger } from './swagger/index';
+import { ValidaEmpresaExistePipe } from 'src/pipe/valida-empresa-existe.pipe';
 
 @Controller('empresas')
 @ApiTags('empresas')
@@ -53,11 +54,14 @@ export class EmpresasController {
     type: BadRequestSwagger,
   })
   @Get(':id')
+  //@Param(ValidaEmpresaExistePipe) param: { id: string }
+
   findOne(@Param('id') id: string) {
     return this.empresaService.findOne(id);
   }
 
   @Patch(':id')
+
   @ApiOperation({ summary: 'Atualizar empresa' })
   @ApiResponse({
     status: 200,
