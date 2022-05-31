@@ -1,26 +1,70 @@
 import { Injectable } from '@nestjs/common';
-import { CreateEmpresaDto } from './dto/create-empresa.dto';
-import { UpdateEmpresaDto } from './dto/update-empresa.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import {
+  CreateEmpresaDto, UpdateEmpresaDto, FlSituacaoEmpresaDto
+} from './dto/index';
+
+import { EmpresaEntity } from './entities/empresa.entity';
 
 @Injectable()
 export class EmpresasService {
-  create(createEmpresaDto: CreateEmpresaDto) {
-    return 'This action adds a new empresa';
+  constructor(
+    @InjectRepository(EmpresaEntity)
+    private readonly cargoRepository: Repository<EmpresaEntity>,
+  ) { }
+
+  async create(createCargoDto: CreateEmpresaDto) {
+    return await this.cargoRepository.save(this.cargoRepository.create(createCargoDto));
   }
 
-  findAll() {
-    return `This action returns all empresas`;
+  async findAll() {
+    return await this.cargoRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} empresa`;
+  async findOne(id: string) {
+    return await this.cargoRepository.findOne(
+      {
+        where:
+          { id }
+      }
+    );
   }
 
-  update(id: number, updateEmpresaDto: UpdateEmpresaDto) {
-    return `This action updates a #${id} empresa`;
+  async findEmpresa(idEmpresa: string) {
+    return await this.cargoRepository.find(
+      {
+        where:
+          { idEmpresa }
+      }
+    );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} empresa`;
+  async update(id: string, updateCargoDto: UpdateEmpresaDto) {
+    return this.cargoRepository.update({ id }, updateCargoDto);
+  }
+
+  remove(id: string) {
+    return this.cargoRepository.delete(id);
+  }
+
+  async flsituacaoUpdate(id: string, flSituacaoCargoDto: FlSituacaoEmpresaDto) {
+    const verificaCargo = await this.cargoRepository.findOne(
+      {
+        where:
+          { id }
+      }
+    );
+    if (verificaCargo) {
+      //   await this.cargoRepository.update({ id }, FlSituacaoEmpresaDto);
+      return {
+        message: 'Flsituação atualizado com sucesso',
+      }
+    }
+    return {
+      message: 'Cargo não encontrado',
+    }
   }
 }
+
+

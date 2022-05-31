@@ -2,9 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, HttpC
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { BadRequestSwagger } from 'src/helpers/swagger/bad-request.swagger';
 import { CargosService } from './cargos.service';
-import { CreateCargoDto } from './dto/create-cargo.dto';
-import { UpdateCargoDto } from './dto/update-cargo.dto';
-import { FlsituacaoUpdateCargoDto } from './dto/update-flsituacao.dto';
+import {
+  CreateCargoDto, UpdateCargoDto, FlSituacaoCargoDto
+} from './dto/index';
 import { CreateCargoSwagger, ShowCargoSwagger, UpdateCargoSwagger } from './swagger/index';
 
 @Controller('cargos')
@@ -91,8 +91,8 @@ export class CargosController {
   }
 
   @Patch('flsituacao/:id')
-  flsituacaoUpdate(@Param('id', new ParseUUIDPipe()) id: string, @Body() flSituacaoCargoDto: FlsituacaoUpdateCargoDto) {
-    return this.cargosService.flsituacaoUpdate(id, flSituacaoCargoDto);
+  flsituacaoUpdate(@Param('id', new ParseUUIDPipe()) id: string, @Body() flsituacaoCargoDto: FlSituacaoCargoDto) {
+    return this.cargosService.flsituacaoUpdate(id, flsituacaoCargoDto);
   }
 }
 

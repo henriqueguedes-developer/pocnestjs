@@ -1,11 +1,10 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsIn, IsUUID } from "class-validator";
 
-export class FlsituacaoUpdateCargoDto {
-
+export class FlSituacaoEmpresaDto {
 
   @IsIn([1, 2], {
-    message: 'O campo flSituacao deve ser um numero, entre 1 e 2',
+    message: 'O campo flSituacao deve ser um numero  entre 1 e 2',
   })
   @ApiProperty({
     description: 'ID da empresa',

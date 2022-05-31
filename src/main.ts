@@ -26,7 +26,7 @@ async function bootstrap() {
       //const message = errors.join(', ');
       //return new BadRequestException(message);
 
-      return new BadRequestException(validationErrors[0].constraints);
+      // return new BadRequestException(validationErrors[0].constraints);
     }
   }));
   await app.listen(3334);
