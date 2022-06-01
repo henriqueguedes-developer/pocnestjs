@@ -1,20 +1,18 @@
-
 import { EmpresaEntity } from 'src/Admin/empresas/entities/empresa.entity';
+import { IBaseTypeormTable } from 'src/helpers/typeorm/base';
 
 import {
   Column,
-  CreateDateColumn,
   Entity,
   Generated,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ schema: 'GB', name: 'CARGOS' })
+@Entity({ name: 'CARGOS' })
 
-export class CargoEntity {
+export class CargoEntity extends IBaseTypeormTable {
 
   @PrimaryGeneratedColumn('uuid', { name: 'ID_CARGO' })
   id: string;
@@ -28,21 +26,6 @@ export class CargoEntity {
 
   @Column({ name: 'DS_CARGO' })
   dsCargo: string;
-
-  @Column({ name: 'FL_SITUACAO' })
-  flSituacao: number;
-
-  @CreateDateColumn({ name: 'DT_CADASTRO' })
-  dtCadastro: Date;
-
-  @Column({ name: 'ID_USUARIO_CADASTRO' })
-  idUsuarioCadastro: string;
-
-  @UpdateDateColumn({ name: 'DT_ALTERACAO' })
-  dtAlteracao?: Date;
-
-  @Column({ nullable: true, name: 'ID_USUARIO_ALTERACAO' })
-  idUsuarioAlteracao?: string;
 
   @ManyToOne(() => EmpresaEntity, empresa => empresa.id)
   @JoinColumn({ name: 'CD_EMPRESA' })

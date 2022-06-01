@@ -10,13 +10,20 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { IBaseTypeormTable } from 'src/helpers/typeorm/base';
 
-@Entity({ schema: 'GB', name: 'EMPRESAS' })
+@Entity({ name: 'EMPRESAS' })
 
-export class EmpresaEntity {
+export class EmpresaEntity extends IBaseTypeormTable {
 
   @PrimaryGeneratedColumn('uuid', { name: 'CD_EMPRESA' })
   id: string;
+
+  /**
+   * O e-mail é necessário apra o login, mas não necessariamente precisa ser o mesmo e-mail da
+   * rede social que estiver conectada. Login sem rede social precisa de uma senha.
+   * @example email@email.com
+   */
 
   @Column({ name: 'NM_EMPRESA' })
   nomeEmpresa: string;
@@ -33,17 +40,8 @@ export class EmpresaEntity {
   @Column({ name: 'FL_EXCLUIDO', default: false })
   excluido: boolean;
 
-  @Column({ name: 'FL_SITUACAO', default: 1 })
-  flSituacao: number;
-
   @Column({ name: 'FL_ADM', default: true })
   flAdm: boolean;
-
-  @CreateDateColumn({ name: 'DT_CADASTRO' })
-  dataCadastro: Date;
-
-  @UpdateDateColumn({ name: 'DT_ALTERCAO' })
-  dataAlteracao?: Date;
 
   @BeforeInsert()
   beforeInsert() {

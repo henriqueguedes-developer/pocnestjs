@@ -15,6 +15,7 @@ export class EmpresasService {
   ) { }
 
   async create(createEmpresaDto: CreateEmpresaDto) {
+
     return await this.empresaRepository.save(this.empresaRepository.create(createEmpresaDto));
   }
 
@@ -40,7 +41,6 @@ export class EmpresasService {
   }
 
   async flsituacaoUpdate(id: string, flsituacaoEmpresaDto: FlSituacaoEmpresaDto) {
-
     const verificaEmpresa = await this.empresaRepository.findOne(
       {
         where:
@@ -53,9 +53,7 @@ export class EmpresasService {
         message: 'Flsituação atualizado com sucesso',
       }
     }
-    return {
-      message: 'Cargo não encontrado',
-    }
+
   }
 }
 

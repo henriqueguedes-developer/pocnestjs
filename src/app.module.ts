@@ -8,6 +8,7 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { AppService } from './app.service';
 import { EmpresasModule } from './Admin/empresas/empresas.module';
 
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -23,13 +24,13 @@ import { EmpresasModule } from './Admin/empresas/empresas.module';
         port: Number(configService.get('TYPEORM_PORT', 3306)),
         entities: [__dirname + '/**/*.entity.js'],
         synchronize: true,
-        logging: false,
+        logging: true,
+
       }),
     }),
     CargosModule,
     AuthModule,
     EmpresasModule,
-
   ],
   controllers: [],
   providers: [

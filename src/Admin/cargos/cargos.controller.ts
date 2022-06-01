@@ -1,96 +1,53 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, HttpCode, HttpStatus } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { BadRequestSwagger } from 'src/helpers/swagger/bad-request.swagger';
+import { ApiOkResponse } from '@nestjs/swagger';
+
 import { CargosService } from './cargos.service';
-import {
-  CreateCargoDto, UpdateCargoDto, FlSituacaoCargoDto
-} from './dto/index';
-import { CreateCargoSwagger, ShowCargoSwagger, UpdateCargoSwagger } from './swagger/index';
+import { CreateCargoDto, UpdateCargoDto, FlSituacaoCargoDto } from './dto/index';
+import { CargoEntity } from './entities/cargo.entity';
 
 @Controller('cargos')
-@ApiTags('cargos')
+
 export class CargosController {
   constructor(private readonly cargosService: CargosService) { }
 
   @Post()
-  @ApiOperation({ summary: 'Adicionar um novo cargo' })
-  @ApiResponse({
-    status: 201,
-    description: 'Cargo retornado com sucesso',
-    type: CreateCargoSwagger,
-  })
-  @ApiResponse({
-    status: 400,
-    description: 'Parâmetros inválidos',
-    type: BadRequestSwagger,
-  })
+  @ApiOkResponse({ status: 200, type: CargoEntity, isArray: true })
   create(@Body() createCargoDto: CreateCargoDto) {
     return this.cargosService.create(createCargoDto);
   }
 
   @Get()
-  @ApiOperation({ summary: 'Listar todos os cargos' })
-  @ApiResponse({
-    status: 200,
-    description: 'Cargos retornados com sucesso',
-    type: ShowCargoSwagger,
-    isArray: true,
-  })
+  @ApiOkResponse({ status: 200, type: CargoEntity, isArray: true })
   findAll() {
     return this.cargosService.findAll();
   }
 
-
-  @ApiOperation({ summary: 'Listar cargos por id' })
-  @ApiResponse({
-    status: 200,
-    description: 'Cargo retornado com sucesso',
-    type: ShowCargoSwagger,
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'Cargo não foi encontrado',
-    type: BadRequestSwagger,
-  })
   @Get(':id')
+  @ApiOkResponse({ status: 200, type: CargoEntity, isArray: true })
   findOne(@Param('id') id: string) {
     return this.cargosService.findOne(id);
   }
 
   @Get('empresa/:id')
+  @ApiOkResponse({ status: 200, type: CargoEntity, isArray: true })
   findEmpresa(@Param('id') id: string) {
     return this.cargosService.findEmpresa(id);
   }
 
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Atualizar cargo' })
-  @ApiResponse({
-    status: 200,
-    description: 'Cargo retornado com sucesso',
-    type: UpdateCargoSwagger,
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'Cargo não foi encontrado',
-    type: BadRequestSwagger,
-  })
   update(@Param('id', new ParseUUIDPipe()) id: string, @Body() updateCargoDto: UpdateCargoDto) {
     return this.cargosService.update(id, updateCargoDto);
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  @ApiOperation({ summary: 'Remover cargo' })
-  @ApiResponse({
-    status: 200,
-    description: 'Cargo removido com sucesso',
-  })
   remove(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.cargosService.remove(id);
   }
 
   @Patch('flsituacao/:id')
+  @ApiOkResponse({ status: 200, type: CargoEntity, isArray: true })
   flsituacaoUpdate(@Param('id', new ParseUUIDPipe()) id: string, @Body() flsituacaoCargoDto: FlSituacaoCargoDto) {
     return this.cargosService.flsituacaoUpdate(id, flsituacaoCargoDto);
   }
