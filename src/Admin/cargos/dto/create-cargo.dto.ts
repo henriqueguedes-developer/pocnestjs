@@ -16,11 +16,6 @@ export class CreateCargoDto {
     message: 'O campo dsCargo deve ser uma string com letras maiúsculas',
   })
 
-  /**
-  * O nome será utilizado para qualquer coisa (Perfil, Home Page, etc) que precise exibir
-  * informações da pessoa conectada.
-  * @example nome do cargo
-  */
   dsCargo: string;
 
   @IsNotEmpty({

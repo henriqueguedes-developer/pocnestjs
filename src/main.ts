@@ -9,6 +9,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('GB  API')
     .setVersion('0.0.1')
+
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
