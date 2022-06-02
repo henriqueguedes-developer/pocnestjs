@@ -7,27 +7,12 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { AppService } from './app.service';
 import { EmpresasModule } from './Admin/empresas/empresas.module';
-
+import config from './ormconfig';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: async (configService) => ({
-        type: configService.get('TYPEORM_CONNECTION'),
-        host: configService.get('TYPEORM_HOST'),
-        database: configService.get('TYPEORM_DATABASE'),
-        username: configService.get('TYPEORM_USERNAME'),
-        password: configService.get('TYPEORM_PASSWORD'),
-        port: Number(configService.get('TYPEORM_PORT', 3306)),
-        entities: [__dirname + '/**/*.entity.js'],
-        synchronize: true,
-        logging: true,
-
-      }),
-    }),
+    TypeOrmModule.forRoot(config),
     CargosModule,
     AuthModule,
     EmpresasModule,
