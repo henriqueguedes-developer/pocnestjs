@@ -11,10 +11,15 @@ export abstract class IBaseTypeormTable {
   @Column({ name: 'ID_USUARIO_CADASTRO' })
   idUsuarioCadastro: string;
 
+  dsUsuarioCadastro?: string;
+
   @UpdateDateColumn({ name: 'DT_ALTERACAO' })
   dtAlteracao?: Date;
 
-  @Column({ nullable: true, name: 'ID_USUARIO_ALTERACAO' })
+  @Column({ name: 'ID_USUARIO_ALTERACAO', default: null })
   idUsuarioAlteracao?: string;
+
+  @Column({ name: 'DS_USUARIO_ALTERACAO', default: null })
+  dsUsuarioAlteracao?: string;
 
 }

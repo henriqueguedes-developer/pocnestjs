@@ -40,7 +40,7 @@ export class CreateCargoDto {
 
   idUsuarioCadastro: string;
 
-  dtAlteracao: Date;
+  dtAlteracao?: Date;
 
-  idUsuarioAlteracao: string;
+  idUsuarioAlteracao?: string;
 }

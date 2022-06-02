@@ -1,13 +1,11 @@
 {
-  "name": "nest-backend",
+  "name": "gb-backend",
   "version": "0.0.1",
   "description": "",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "postinstall": "typeorm migration:run",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -21,11 +19,11 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm:cli": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -f src/config/typeorm.config-migrations.ts",
-    "migration:generate": "npm run typeorm:cli -- migration:generate -d src/database/migrations -n",
-    "migration:create": "npm run typeorm:cli -- migration:create -d src/database/migrations -n",
-    "migration:run": "npm run typeorm:cli -- migration:run",
-    "migration:revert": "npm run typeorm:cli -- migration:revert"
+    "typeorm": "node --require ts-node-dev ./node_modules/typeorm/cli.js",
+    "migration:run": "ts-node --project ./tsconfig.json -r tsconfig-paths/register node_modules/typeorm/cli.js migration:run",
+    "migration:revert": "ts-node --project ./tsconfig.json -r tsconfig-paths/register node_modules/typeorm/cli.js migration:revert",
+    "migration:create": "ts-node --project ./tsconfig.json -r tsconfig-paths/register node_modules/typeorm/cli.js migration:create",
+    "migration:generate": "ts-node --project ./tsconfig.json -r tsconfig-paths/register node_modules/typeorm/cli.js migration:generate -- -n"
   },
   "dependencies": {
     "@nestjs/common": "^8.4.5",

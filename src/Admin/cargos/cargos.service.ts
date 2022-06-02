@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import {
@@ -23,21 +23,34 @@ export class CargosService {
   }
 
   async findOne(id: string) {
-    return await this.cargoRepository.findOne(
-      {
-        where:
-          { id }
-      }
-    );
+    try {
+      const cargo = await this.cargoRepository.findOneByOrFail({ id });
+      return
+    }
+    catch (error) {
+      throw new HttpException({
+        status: HttpStatus.FORBIDDEN,
+        error: 'Cargo nao Encontrado',
+      }, HttpStatus.FORBIDDEN);
+    }
   }
 
   async findEmpresa(idEmpresa: string) {
-    return await this.cargoRepository.find(
-      {
-        where:
-          { idEmpresa }
-      }
-    );
+
+    try {
+      return await this.cargoRepository.find({
+        where: {
+          idEmpresa,
+        },
+      });
+    }
+    catch (error) {
+      throw new HttpException({
+        status: HttpStatus.FORBIDDEN,
+        error: 'Empresa nao Encontrada',
+      }, HttpStatus.FORBIDDEN);
+    }
+
   }
 
   async update(id: string, updateCargoDto: UpdateCargoDto) {
@@ -49,20 +62,17 @@ export class CargosService {
   }
 
   async flsituacaoUpdate(id: string, flsituacaoCargoDto: FlSituacaoCargoDto) {
-    const verificaCargo = await this.cargoRepository.findOne(
-      {
-        where:
-          { id }
-      }
-    );
-    if (verificaCargo) {
+    try {
       await this.cargoRepository.update({ id }, flsituacaoCargoDto);
       return {
         message: 'Flsituação atualizado com sucesso',
       }
     }
-    return {
-      message: 'Cargo não encontrado',
+    catch (error) {
+      throw new HttpException({
+        status: HttpStatus.FORBIDDEN,
+        error: 'Cargo nao Encontrado',
+      }, HttpStatus.FORBIDDEN);
     }
   }
 }
