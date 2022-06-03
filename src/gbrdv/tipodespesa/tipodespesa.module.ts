@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { TipodespesaService } from './tipodespesa.service';
-
 import { TipodespesaController } from './tipodespesa.controller';
 import { EmpresasModule } from 'src/Admin/empresas/empresas.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
