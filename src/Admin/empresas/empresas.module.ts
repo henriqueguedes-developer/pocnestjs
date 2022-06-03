@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   imports: [TypeOrmModule.forFeature([EmpresaEntity])],
   controllers: [EmpresasController],
   providers: [EmpresasService],
+  exports: [EmpresasService]
 
 
 
