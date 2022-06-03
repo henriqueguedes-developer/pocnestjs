@@ -9,8 +9,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-
-@Entity({ name: 'TIPO_DESPESA' })
+@Entity({ schema: 'GB', name: 'TIPO_DESPESA' })
 
 export class TipodespesaEntity extends IBaseTypeormTable {
 
@@ -26,6 +25,8 @@ export class TipodespesaEntity extends IBaseTypeormTable {
 
   @Column({ name: 'DS_TIPODESPESA' })
   dsTipodespesa: string;
+
+
 
   @Column({ name: 'FL_PADRAO' })
   flPadrao: number;
@@ -44,6 +45,7 @@ export class TipodespesaEntity extends IBaseTypeormTable {
 
   @Column({ name: 'FL_CALCULA_KM_RODADO ' })
   flCalculaKMRodado: number;
+
 
   @ManyToOne(() => EmpresaEntity, empresa => empresa.id)
   @JoinColumn({ name: 'CD_EMPRESA' })

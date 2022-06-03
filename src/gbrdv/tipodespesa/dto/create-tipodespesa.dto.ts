@@ -14,6 +14,8 @@ export class CreateTipodespesaDto {
   @IsUppercase({ message: 'O campo dsTipoDespesa deve ser uma string em maiúsculo' })
   dsTipodespesa: string;
 
+
+
   @IsNotEmpty({
     message: 'O Flsituação é obrigatório',
   })

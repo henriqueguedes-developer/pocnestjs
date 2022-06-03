@@ -12,7 +12,7 @@ import {
 } from 'typeorm';
 import { IBaseTypeormTable } from 'src/helpers/typeorm/base';
 
-@Entity({ name: 'EMPRESAS' })
+@Entity({ schema: 'GB', name: 'EMPRESAS' })
 
 export class EmpresaEntity extends IBaseTypeormTable {
 

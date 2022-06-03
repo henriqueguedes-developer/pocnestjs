@@ -10,7 +10,6 @@ import { EmpresasModule } from './Admin/empresas/empresas.module';
 import { TipodespesaModule } from './gbrdv/tipodespesa/tipodespesa.module';
 
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),

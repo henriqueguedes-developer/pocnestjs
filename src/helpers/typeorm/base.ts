@@ -8,7 +8,7 @@ export abstract class IBaseTypeormTable {
   @CreateDateColumn({ name: 'DT_CADASTRO' })
   dtCadastro: Date;
 
-  @Column({ name: 'ID_USUARIO_CADASTRO' })
+  @Column({ name: 'ID_USUARIO_CADASTRO', default: null })
   idUsuarioCadastro: string;
 
   dsUsuarioCadastro?: string;

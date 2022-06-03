@@ -18,6 +18,7 @@ export class CreateCargoDto {
 
   dsCargo: string;
 
+
   @IsNotEmpty({
     message: 'O Flsituação é obrigatório',
   })

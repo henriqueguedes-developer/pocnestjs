@@ -36,6 +36,7 @@ export class CargosController {
 
 
   @Patch(':id')
+
   update(@Param('id', new ParseUUIDPipe()) id: string, @Body() updateCargoDto: UpdateCargoDto) {
     return this.cargosService.update(id, updateCargoDto);
   }

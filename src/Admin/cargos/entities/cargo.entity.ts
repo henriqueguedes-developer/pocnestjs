@@ -10,7 +10,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity({ name: 'CARGOS' })
+
+@Entity({ schema: 'GB', name: 'CARGOS' })
 
 export class CargoEntity extends IBaseTypeormTable {
 
